@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, ICharacter
 {
     public static GameObject playerObject;
     public static Player s;
     public Rigidbody2D rb;
-    public object[] heldObjects;
+    public IWeapon[] weps = new IWeapon[] { };
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +17,9 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetMouseButtonDown(0))
+        {
+            //weps[0].Use(0);
+        }
     }
 }
