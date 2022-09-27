@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6ece63cee43af64694bb028c11d151f, type: 3}
   m_Name: Minigun
   m_EditorClassIdentifier: 
-  prefabReferences: []
-  fireRate: 0
-  ammo: 0
+  prefabReferences:
+  - Bullet
+  Damage: 1
+  ammo: 16

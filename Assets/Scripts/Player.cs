@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Dynamic;
 public class Player : MonoBehaviour, ICharacter
 {
     public static GameObject playerObject;
@@ -20,7 +21,11 @@ public class Player : MonoBehaviour, ICharacter
     {
         if (Input.GetMouseButtonDown(0))
         {
-            weps[0].Use(0);
+            Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            dynamic o = new ExpandoObject();
+            o.user = this;
+            o.direction = ((Vector2)transform.position - pos).normalized;
+            weps[0].Use(o);
         }
     }
 }

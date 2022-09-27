@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Dynamic;
 //Basic class for all weapons that simply fire a projectile
 public class Launcher : IWeapon
 {
@@ -18,9 +19,10 @@ public class Launcher : IWeapon
     /// Fire the launcher. 
     /// </summary>
     /// <param name="a"></param>
-    public void Use(object a)
+    public void Use(dynamic param)
     {
-        GameObject gb = Object.Instantiate(projectile, new Vector2(0, 0), Quaternion.identity);
+        
+        GameObject gb = Object.Instantiate(projectile, param.user.transform.position, Quaternion.identity);
         
     }
     public Launcher(string name)
