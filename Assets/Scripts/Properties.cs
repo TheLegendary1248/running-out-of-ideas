@@ -8,7 +8,7 @@ public class Properties : MonoBehaviour
     public ExpandoObject properties;
     void MyF()
     {
-        
+           
     }
     // Start is called before the first frame update
     void Start()
