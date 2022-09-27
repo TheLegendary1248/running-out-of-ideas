@@ -4,6 +4,7 @@ using UnityEngine;
 //Base interface for weapons
 public interface IWeapon
 {
+    public string name { get; }
     public bool isFinite { get; set; }
     public int quantity { get; set; }
 
