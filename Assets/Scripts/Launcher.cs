@@ -16,7 +16,7 @@ public class Launcher : MonoBehaviour, IWeapon
     /// <param name="a"></param>
     public void Use(object a)
     {
-        GameObject projectile = GameObject.Instantiate(projectile, new Vector2(0, 0), Quaternion.identity);
+        //GameObject projectile = GameObject.Instantiate(projectile, new Vector2(0, 0), Quaternion.identity);
         
     }
 
