@@ -15,6 +15,7 @@ public class Player : MonoBehaviour, ICharacter
     {
         weps[0] = new Launcher("Minigun");
         s = this;
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -29,5 +30,11 @@ public class Player : MonoBehaviour, ICharacter
             o.spawn = (Vector2)transform.position + (o.direction * 0.5f);
             weps[0].Use(o);
         }
+    }
+    ///<summary>Disable player's presence in the world when the level end has been reached</summary>
+    public void YieldToEnd()
+    {
+        rb.simulated = false;
+        this.enabled = false;
     }
 }

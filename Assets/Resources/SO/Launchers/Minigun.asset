@@ -18,3 +18,4 @@ MonoBehaviour:
   ammo: 16
   knockback: 6
   fireRate: 0
+  force: 5

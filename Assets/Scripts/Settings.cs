@@ -17,9 +17,8 @@ public class Settings : MonoBehaviour
         {
             string[] split = t.Split("/");
             string shorthand = split[split.Length - 1];
-            Debug.Log(string.Join(",", Encoding.ASCII.GetBytes(t)));
             if (!CommonPathNames.TryAdd(shorthand, t)) Debug.LogWarning("Failed to add to Settings.CommonPathNames. Naming conflict likely occured");
-            else Debug.Log($"Added {shorthand} : {t}");
+            //else Debug.Log($"Added {shorthand} : {t}");
         }
     }
 }

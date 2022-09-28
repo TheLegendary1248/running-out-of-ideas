@@ -18,6 +18,7 @@ public class Launcher : IWeapon
     public string[] prefabRefs { get; }
     public int maxQuantity { get; set; }
     public float damage { get; set; }
+    public float force { get; set; }
     ///<summary>The projectile to be used</summary>
     public GameObject projectile;
     Coroutine waitForNextFire;
@@ -30,7 +31,7 @@ public class Launcher : IWeapon
         WeaponUseInfo p = param;
         p.user.GetComponent<Rigidbody2D>().AddForce(-knockBack * p.direction, ForceMode2D.Impulse);
         GameObject gb = Object.Instantiate(projectile, p.spawn, Quaternion.LookRotation(Vector3.forward ,p.direction));
-        gb.GetComponent<Rigidbody2D>().AddForce(p.direction * 50f, ForceMode2D.Impulse);
+        gb.GetComponent<Rigidbody2D>().AddForce(p.direction * force, ForceMode2D.Impulse);
     }
     public Launcher(string name)
     {
@@ -38,7 +39,7 @@ public class Launcher : IWeapon
         quantity = so.ammo;
         this.name = name;
         knockBack = so.knockback;
-        
+        force = so.force;
         projectile = (GameObject)Resources.Load(Settings.CommonPathNames["Projectiles"] + $"/{so.prefabReferences[0]}");
     }
 }
