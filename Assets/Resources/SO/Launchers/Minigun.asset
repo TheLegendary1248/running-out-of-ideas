@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabReferences:
   - Bullet
-  Damage: 1
+  damage: 1
   ammo: 16
+  knockback: 6
+  fireRate: 0

@@ -14,6 +14,7 @@ public class Player : MonoBehaviour, ICharacter
     void Start()
     {
         weps[0] = new Launcher("Minigun");
+        s = this;
     }
 
     // Update is called once per frame
@@ -22,9 +23,10 @@ public class Player : MonoBehaviour, ICharacter
         if (Input.GetMouseButtonDown(0))
         {
             Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            dynamic o = new ExpandoObject();
+            WeaponUseInfo o = new WeaponUseInfo();
             o.user = this;
-            o.direction = ((Vector2)transform.position - pos).normalized;
+            o.direction = (pos - (Vector2)transform.position).normalized;
+            o.spawn = (Vector2)transform.position + (o.direction * 0.5f);
             weps[0].Use(o);
         }
     }

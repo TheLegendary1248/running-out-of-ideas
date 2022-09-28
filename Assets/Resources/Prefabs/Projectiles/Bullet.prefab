@@ -208,7 +208,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!96 &6166866650073550210
 TrailRenderer:
@@ -267,15 +267,15 @@ TrailRenderer:
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.33333334
+        outWeight: 0.24
       - serializedVersion: 3
         time: 1
         value: 0
-        inSlope: 0
-        outSlope: 0
+        inSlope: 0.04710458
+        outSlope: 0.04710458
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0
+        inWeight: 0.23853213
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -283,7 +283,7 @@ TrailRenderer:
     colorGradient:
       serializedVersion: 2
       key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 0}
+      key1: {r: 1, g: 1, b: 1, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -299,7 +299,7 @@ TrailRenderer:
       ctime6: 0
       ctime7: 0
       atime0: 0
-      atime1: 65535
+      atime1: 65342
       atime2: 0
       atime3: 0
       atime4: 0
@@ -330,5 +330,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84887ab1e4eb71e4ebbd95aa0bc27a9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 0
-  Damage: 0
+  props: {fileID: 0}

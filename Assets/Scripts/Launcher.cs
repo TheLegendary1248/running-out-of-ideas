@@ -9,27 +9,36 @@ public class Launcher : IWeapon
     public bool isFinite { get; set; }
     public int quantity { get; set; }
     [SerializeField]
+    ///<summary>The fire rate for the weapon</summary>
     public float fireRate { get; set; }
+    ///<summary>The knockback of weapon, obviously used for traversal</summary>
+    public float knockBack { get; set; }
     public string name { get; private set; }
+    ///<summary>Prefab references for instantiating projectiles</summary>
     public string[] prefabRefs { get; }
-
+    public int maxQuantity { get; set; }
+    public float damage { get; set; }
+    ///<summary>The projectile to be used</summary>
     public GameObject projectile;
     Coroutine waitForNextFire;
     /// <summary>
-    /// Fire the launcher. 
+    /// Fire the launcher 
     /// </summary>
-    /// <param name="a"></param>
-    public void Use(dynamic param)
+    /// <param name="param">Can be anything. Very ideally use WeaponUseInfo</param>
+    public virtual void Use(dynamic param)
     {
-        
-        GameObject gb = Object.Instantiate(projectile, param.user.transform.position, Quaternion.identity);
-        
+        WeaponUseInfo p = param;
+        p.user.GetComponent<Rigidbody2D>().AddForce(-knockBack * p.direction, ForceMode2D.Impulse);
+        GameObject gb = Object.Instantiate(projectile, p.spawn, Quaternion.LookRotation(Vector3.forward ,p.direction));
+        gb.GetComponent<Rigidbody2D>().AddForce(p.direction * 50f, ForceMode2D.Impulse);
     }
     public Launcher(string name)
     {
-        SO_Launcher so = (SO_Launcher)Resources.Load($"SO/Launchers/{name}");
+        SO_Launcher so = (SO_Launcher)Resources.Load(Settings.CommonPathNames["Launchers"] + $"/{name}");
         quantity = so.ammo;
         this.name = name;
-        projectile = (GameObject)Resources.Load($"Prefabs/Projectiles/{so.prefabReferences[0]}");
+        knockBack = so.knockback;
+        
+        projectile = (GameObject)Resources.Load(Settings.CommonPathNames["Projectiles"] + $"/{so.prefabReferences[0]}");
     }
 }
