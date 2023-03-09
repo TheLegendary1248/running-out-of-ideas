@@ -17,5 +17,5 @@ MonoBehaviour:
   ammo: 0
   knockback: 0
   fireRate: 0
-  force: 0
-  selfDamage: 0
+  force: -5
+  selfDamage: 0.1

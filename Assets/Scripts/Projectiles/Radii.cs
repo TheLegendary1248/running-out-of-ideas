@@ -8,6 +8,8 @@ public class Radii : MonoBehaviour, IExplosive
     public float i_time => time; public float i_radius => radius; public float i_fuse => radius;
     public float time, radius, fuse;
     public Rigidbody2D rb;
+    public GameObject fx;
+    public SpriteRenderer fxSprite;
     // Start is called before the first frame update
 
     void OnCollisionEnter2D()
@@ -15,18 +17,28 @@ public class Radii : MonoBehaviour, IExplosive
         //Trigger
         rb.simulated = false;
         StartCoroutine(Function());
+        Debug.Log("Hello?");
     }
     IEnumerator Function()
     {
         yield return null;
         float timeStamp = Time.fixedTime;
         float timeDif = Time.fixedTime - i_time;
-        while (timeDif < timeStamp && Time.fixedTime > timeStamp) //In case i decide to implement time shenanigans
+        fx.transform.parent = null;
+        fx.transform.localScale = Vector2.zero;
+        fx.SetActive(true);
+        while (timeDif < timeStamp) //In case i decide to implement time shenanigans
         {   //Keep loop
-            ForceObjectsToRadius(radius * ((Time.fixedTime - timeStamp) / time), transform.position);
+            float range = (Time.fixedTime - timeStamp) / time;
+            ForceObjectsToRadius(radius * range, transform.position);
+            fx.transform.localScale = Vector2.one * radius * range * 2f;
+            fx.transform.position = transform.position;
+            fxSprite.material.SetFloat("_Fill", 1 - range);
             yield return new WaitForFixedUpdate();
             timeDif = Time.fixedTime - time;
         }
+        Destroy(fx);
+        Destroy(gameObject);
     }
     /// <summary>
     /// Forces all object in radius to the circle formed by the radius

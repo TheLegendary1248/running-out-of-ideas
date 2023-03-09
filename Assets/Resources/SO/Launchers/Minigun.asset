@@ -16,7 +16,7 @@ MonoBehaviour:
   - Bullet
   damage: 1
   ammo: 16
-  knockback: 6
+  knockback: 10
   fireRate: 0
   force: 40
-  selfDamage: 0
+  selfDamage: 0.05
