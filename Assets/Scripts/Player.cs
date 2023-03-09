@@ -5,6 +5,7 @@ using System;
 using System.Dynamic;
 public class Player : MonoBehaviour, ICharacter
 {
+    public Vector2 rate;
     public static GameObject playerObject;
     public static Player s;
     [HideInInspector]
@@ -36,5 +37,9 @@ public class Player : MonoBehaviour, ICharacter
     {
         rb.simulated = false;
         this.enabled = false;
+    }
+    public void FixedUpdate()
+    {
+        transform.localScale = (Vector2)transform.localScale - (rate * Time.fixedDeltaTime);
     }
 }

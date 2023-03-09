@@ -16,7 +16,7 @@ public class CamFollow : MonoBehaviour
         {
             //TODO :SMOOTH INTERLOP
             //Camera Location
-            transform.position = Player.s.transform.position + new Vector3(0, 0, -10);
+            transform.position = Player.s.transform.position + new Vector3(0, 0, 0);
             //Dynamic camera zoom depending on car speed
             //cam.orthographicSize = Mathf.Min(viewSizeCap, baseCameraSize + (viewMulti * Player.s.rb.velocity.magnitude));
         }

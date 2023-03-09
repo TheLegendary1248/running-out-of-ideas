@@ -16,4 +16,6 @@ public class SO_Launcher : ScriptableObject
     public float fireRate;
     [Tooltip("The force the launcher applies to the projectile")]
     public float force;
+    [Tooltip("The amount the projectile takes from the player")]
+    public float selfDamage;
 }
