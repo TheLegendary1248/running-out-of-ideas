@@ -10,12 +10,14 @@ public class Radii : MonoBehaviour, IExplosive
     public Rigidbody2D rb;
     public GameObject fx;
     public SpriteRenderer fxSprite;
+    public AudioSource aud;
     // Start is called before the first frame update
 
     void OnCollisionEnter2D()
     {
         //Trigger
         rb.simulated = false;
+        aud.Play();
         StartCoroutine(Function());
         Debug.Log("Hello?");
     }

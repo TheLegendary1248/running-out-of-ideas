@@ -28,7 +28,7 @@ public class Player : MonoBehaviour, ICharacter
             WeaponUseInfo o = new WeaponUseInfo();
             o.user = this;
             o.direction = (pos - (Vector2)transform.position).normalized;
-            o.spawn = (Vector2)transform.position + (o.direction * 0.5f);
+            o.spawn = (Vector2)transform.position + (o.direction * 2f);
             weps[0].Use(o);
         }
     }
