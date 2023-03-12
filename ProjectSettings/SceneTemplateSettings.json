@@ -61,7 +61,7 @@
             "userAdded": false,
             "type": "UnityEngine.LightingSettings",
             "ignore": false,
-            "defaultInstantiationMode": 0,
+            "defaultInstantiationMode": 1,
             "supportsModification": true
         },
         {
