@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 250560337142188914}
   - component: {fileID: 1708552600360546368}
   m_Layer: 0
-  m_Name: End
+  m_Name: Level End Portal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

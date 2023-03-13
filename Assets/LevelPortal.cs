@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class LevelPortal : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public string LevelName;
+    public void Awake()
     {
-        
+        //Update to utilize unity console effectively
+        if (string.IsNullOrEmpty(LevelName)) throw new System.MissingFieldException($"Level Portal Name on {gameObject.name} is empty");
     }
-
-    // Update is called once per frame
-    void Update()
+    public void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        if(collision.CompareTag("Player"))
+        {
+            MasterManager.LoadScene(LevelName);
+        }
     }
 }
