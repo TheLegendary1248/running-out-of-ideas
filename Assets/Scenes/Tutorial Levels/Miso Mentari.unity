@@ -451,6 +451,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Object
       objectReference: {fileID: 0}
+    - target: {fileID: 3590249784154979562, guid: d6e7af66660316841b3fea4d998f0694, type: 3}
+      propertyPath: slideSFX
+      value: 
+      objectReference: {fileID: 2039703870}
     - target: {fileID: 3590249784154979563, guid: d6e7af66660316841b3fea4d998f0694, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -935,3 +939,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 972812686a4b43341b531dccf89119f4, type: 3}
+--- !u!82 &2039703870 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 4880056650284445114, guid: d6e7af66660316841b3fea4d998f0694, type: 3}
+  m_PrefabInstance: {fileID: 1081154541}
+  m_PrefabAsset: {fileID: 0}

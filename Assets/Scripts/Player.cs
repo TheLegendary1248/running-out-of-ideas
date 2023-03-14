@@ -11,9 +11,13 @@ public class Player : MonoBehaviour, ICharacter
     [HideInInspector]
     public Rigidbody2D rb;
     public IWeapon[] weps = new IWeapon[1];
+    public AudioSource slideSFX;
+    public float maxSpeed;
+    public AnimationCurve slide_curve;
     // Start is called before the first frame update
     void Start()
     {
+
         weps[0] = new Launcher("Minigun");
         s = this;
         rb = GetComponent<Rigidbody2D>();
@@ -40,6 +44,11 @@ public class Player : MonoBehaviour, ICharacter
     }
     public void FixedUpdate()
     {
+        //Kill on passing zero
         transform.localScale = (Vector2)transform.localScale - (rate * Time.fixedDeltaTime);
+        //Sliding sound effect
+        float speed = rb.velocity.magnitude / maxSpeed;
+        slideSFX.volume = Mathf.Min(slide_curve.Evaluate(speed), maxSpeed);
+        slideSFX.pitch = Mathf.Lerp(0.5f, 1f, slide_curve.Evaluate(speed));
     }
 }
