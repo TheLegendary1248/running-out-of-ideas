@@ -14,6 +14,9 @@ public class Player : MonoBehaviour, ICharacter
     public AudioSource slideSFX;
     public float maxSpeed;
     public AnimationCurve slide_curve;
+    public AudioSource impactSFX;
+    public float slide_multi = 0;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -48,7 +51,21 @@ public class Player : MonoBehaviour, ICharacter
         transform.localScale = (Vector2)transform.localScale - (rate * Time.fixedDeltaTime);
         //Sliding sound effect
         float speed = rb.velocity.magnitude / maxSpeed;
-        slideSFX.volume = Mathf.Min(slide_curve.Evaluate(speed), maxSpeed);
+        slideSFX.volume = slide_multi * Mathf.Min(slide_curve.Evaluate(speed), maxSpeed);
         slideSFX.pitch = Mathf.Lerp(0.5f, 1f, slide_curve.Evaluate(speed));
+    }
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        impactSFX.volume = Mathf.Min(collision.relativeVelocity.sqrMagnitude / (maxSpeed * maxSpeed), maxSpeed * maxSpeed);
+        impactSFX.Play();
+
+    }
+    public void OnCollisionStay2D(Collision2D collision)
+    {
+        slide_multi = 1;
+    }
+    public void OnCollisionExit2D(Collision2D collision)
+    {
+        slide_multi = 0;
     }
 }
