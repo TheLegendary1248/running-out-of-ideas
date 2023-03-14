@@ -19,7 +19,6 @@ public class Radii : MonoBehaviour, IExplosive
         rb.simulated = false;
         aud.Play();
         StartCoroutine(Function());
-        Debug.Log("Hello?");
     }
     IEnumerator Function()
     {
