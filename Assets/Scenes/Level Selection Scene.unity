@@ -256,6 +256,10 @@ PrefabInstance:
       propertyPath: LevelName
       value: Play Test Scene
       objectReference: {fileID: 0}
+    - target: {fileID: 4571470993523428822, guid: 8e7a21a4ae7106b41bd0e9c28446d8c9, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 4571470993523428823, guid: 8e7a21a4ae7106b41bd0e9c28446d8c9, type: 3}
       propertyPath: m_RootOrder
       value: 2
