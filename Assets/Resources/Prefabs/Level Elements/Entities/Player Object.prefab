@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 180154978c67145489eb5f9359bfe4e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rate: {x: 0.1, y: 0.1}
+  rate: {x: 0.3, y: 0.3}
   rb: {fileID: 0}
   slideSFX: {fileID: 4880056650284445114}
   maxSpeed: 90
@@ -189,7 +189,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -1529225477946735313, guid: 379420b5513be7c4f89bfad175b8a00e, type: 2}
   m_audioClip: {fileID: 8300000, guid: eddb72aa5e309d44c9e88c6d06d5e311, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
@@ -283,9 +283,9 @@ AudioSource:
   m_GameObject: {fileID: 3590249784154979351}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -1529225477946735313, guid: 379420b5513be7c4f89bfad175b8a00e, type: 2}
   m_audioClip: {fileID: 8300000, guid: 76dfcf6083697ae44a47a6605de830f6, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

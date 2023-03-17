@@ -48,7 +48,7 @@ public class Radii : MonoBehaviour, IExplosive
     {
         
         //Get all objects
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(pos, radius);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(pos, radius, ~LayerMask.GetMask("Environment"));
         for (int i = 0; i < colliders.Length; i++)
         {   
             Vector2 objPos = colliders[i].transform.position;

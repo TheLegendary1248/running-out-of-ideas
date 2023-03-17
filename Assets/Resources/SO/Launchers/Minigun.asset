@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Minigun
   m_EditorClassIdentifier: 
   prefabReferences:
-  - Bullet
+  - Radii
   damage: 1
   ammo: 16
   knockback: 10
   fireRate: 0
   force: 30
-  selfDamage: 0.05
+  selfDamage: 0.2
