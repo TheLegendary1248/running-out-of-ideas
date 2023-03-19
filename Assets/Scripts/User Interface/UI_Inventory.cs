@@ -7,6 +7,12 @@ public class UI_Inventory : MonoBehaviour
 {
     public UI_ItemSlot primary;
     public UI_ItemSlot secondary;
-
+    public void Update()
+    {
+        if(Input.GetMouseButtonDown(0))
+        {
+            primary.SetItem();
+        }
+    }
 
 }

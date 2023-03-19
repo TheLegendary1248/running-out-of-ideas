@@ -24,7 +24,7 @@ public class Radii : MonoBehaviour, IExplosive
     {
         yield return null;
         float timeStamp = Time.fixedTime;
-        float timeDif = Time.fixedTime - i_time;
+        float timeDif = Time.fixedTime - time;
         fx.transform.parent = null;
         fx.transform.localScale = Vector2.zero;
         fx.SetActive(true);
