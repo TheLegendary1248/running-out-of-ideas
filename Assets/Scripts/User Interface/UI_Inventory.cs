@@ -11,7 +11,7 @@ public class UI_Inventory : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0))
         {
-            primary.SetItem();
+            primary.UsedItem();
         }
     }
 

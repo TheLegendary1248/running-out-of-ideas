@@ -37,14 +37,5 @@ public class Launcher : IWeapon
         Vector2 userScale = p.user.transform.localScale;
         p.user.transform.localScale = userScale + new Vector2(selfDamage, selfDamage);
     }
-    public Launcher(string name)
-    {
-        SO_Launcher so = (SO_Launcher)Resources.Load(Settings.commonPathNames["Launchers"] + $"/{name}");
-        quantity = so.ammo;
-        this.name = name;
-        knockBack = so.knockback;
-        force = so.force;
-        selfDamage = so.selfDamage;
-        projectile = (GameObject)Resources.Load(Settings.commonPathNames["Projectiles"] + $"/{so.prefabReferences[0]}");
-    }
+    
 }

@@ -7,10 +7,10 @@ public class Player : MonoBehaviour, ICharacter
 {
     public Vector2 rate;
     public static GameObject playerObject;
-    public static Player s;
+    public static Player instance;
     [HideInInspector]
     public Rigidbody2D rb;
-    public IWeapon[] weps = new IWeapon[1];
+    public SO_Launcher[] weps = new SO_Launcher[2];
     public AudioSource slideSFX;
     public float maxSpeed;
     public AnimationCurve slide_curve;
@@ -21,8 +21,8 @@ public class Player : MonoBehaviour, ICharacter
     void Start()
     {
 
-        weps[0] = new Launcher("Minigun");
-        s = this;
+        weps[0] = SO_Launcher.GetLauncher("Minigun");
+        instance = this;
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -37,6 +37,9 @@ public class Player : MonoBehaviour, ICharacter
             o.direction = (pos - (Vector2)transform.position).normalized;
             o.spawn = (Vector2)transform.position + (o.direction * 2f);
             weps[0].Use(o);
+            //Affect scale with shot
+            Vector2 userScale = transform.localScale;
+            transform.localScale = userScale + new Vector2(weps[0].selfDamage, weps[0].selfDamage);
         }
     }
     ///<summary>Disable player's presence in the world when the level end has been reached</summary>

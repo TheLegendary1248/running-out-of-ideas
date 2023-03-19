@@ -22,12 +22,25 @@ public class UI_ItemSlot : MonoBehaviour
     }
     public void UsedItem()
     {
-
+        StartCoroutine(AnimateShot());
     }
     //Animates usage of an item on the UI
     IEnumerator AnimateShot()
     {
-        float timestamp = Time.fixedTime;
+        const float time = 0.25f;
+        float timeStamp = Time.fixedTime;
+        float timeDif = Time.fixedTime - time;
+        while (timeDif < timeStamp)
+        {
+            float range = (Time.fixedTime - timeStamp) / time;
+            //Lerp Color
+            img.color = Color.Lerp(Color.cyan,Color.white, range);
+            //Iterate
+            yield return new WaitForFixedUpdate();
+            timeDif = Time.fixedTime - time;
+        }
+        //End State
+        img.color = Color.white;
         yield return null;
     }
     //Animates get of an item on the UI
@@ -55,11 +68,4 @@ public class UI_ItemSlot : MonoBehaviour
         img.rectTransform.anchorMax = Vector2.one;
         yield return null;
     }
-    //Manually runs 'FixedUpdate' for the previous
-    IEnumerator RunAnims()
-    {
-        yield return null;
-    }
-    
-    
 }

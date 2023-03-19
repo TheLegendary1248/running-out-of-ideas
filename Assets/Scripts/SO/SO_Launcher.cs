@@ -4,18 +4,24 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Gun", menuName = "SO/Launcher", order = 1)]
 public class SO_Launcher : ScriptableObject
 {
-    [Tooltip("Path references to prefabs in Resources. Namely the projectile prefabs")]
-    public string[] prefabReferences;
-    [Tooltip("The damage the projectile should do with this launcher")]
-    public float damage;
-    [Tooltip("The amount of ammunition available for this launcher")]
+    [Tooltip("Path references to prefabs in Resources")]
+    public GameObject projectile;
+    [Tooltip("The amount of ammunition available for this launcher. Mostly only applies to Player")]
     public int ammo;
     [Tooltip("How much knockback the launcher produces")]
     public float knockback;
-    [Tooltip("The delay in between shots for automatic weapons")]
-    public float fireRate;
-    [Tooltip("The force the launcher applies to the projectile")]
-    public float force;
     [Tooltip("The amount the projectile takes from the player")]
     public float selfDamage;
+    public virtual void Use(dynamic param)
+    {
+        WeaponUseInfo p = param;
+        p.user.GetComponent<Rigidbody2D>()?.AddForce(-knockback * p.direction, ForceMode2D.Impulse);
+        GameObject gb = Instantiate(projectile, p.spawn, Quaternion.LookRotation(Vector3.forward, p.direction));
+        gb.GetComponent<Rigidbody2D>().AddForce(p.direction * knockback, ForceMode2D.Impulse);
+        
+    }
+    public static SO_Launcher GetLauncher(string name)
+    {
+        return (SO_Launcher)Resources.Load(Settings.commonPathNames["Launchers"] + $"/{name}");
+    }
 }
