@@ -5,10 +5,11 @@ using UnityEngine;
 public class EndGoal : MonoBehaviour
 {
     ///<summary>The length of the level end animation time. Effectively scales said animation too</summary>
-    public static float EndAnimationTime = 1f;
+    public static float EndAnimationTime = 0.75f;
     Coroutine reachedEndAnim;
     public AudioSource aud;
     public SpriteRenderer spr;
+    public string Next;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
