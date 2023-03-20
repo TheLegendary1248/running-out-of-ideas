@@ -40,7 +40,7 @@ public class UI_ItemSlot : MonoBehaviour
         const float time = 0.25f;
         float timeStamp = Time.fixedTime;
         float timeDif = Time.fixedTime - time;
-        ammoImg.transform.localScale = new Vector2(/*itemRef.ammo / itemRef.instance.ammo*/ Random.value, 1f);
+        ammoImg.transform.localScale = new Vector2((float)itemRef.ammo / itemRef.instance.ammo, 1f);
         while (timeDif < timeStamp)
         {
             float range = (Time.fixedTime - timeStamp) / time;

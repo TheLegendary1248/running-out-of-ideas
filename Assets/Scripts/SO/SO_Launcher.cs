@@ -36,6 +36,10 @@ public class LauncherInstance
     }
     public void Use(dynamic param)
     {
-        instance.Use(param);
+        if(ammo > 0)
+        {
+            ammo -= 1;
+            instance.Use(param);
+        }
     }
 }

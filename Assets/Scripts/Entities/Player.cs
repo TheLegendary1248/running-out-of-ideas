@@ -84,7 +84,12 @@ public class Player : MonoBehaviour, ICharacter, IWielder
     public void OnCollisionEnter2D(Collision2D collision)
     {
         impactSFX.volume = Mathf.Min(collision.relativeVelocity.sqrMagnitude / (maxSpeed * maxSpeed), maxSpeed * maxSpeed);
+        
         impactSFX.Play();
+        foreach(LauncherInstance inst in holding)
+        {
+            if (inst != null) inst.ammo = inst.instance.ammo;
+        }
 
     }
     public void OnCollisionStay2D(Collision2D collision)
