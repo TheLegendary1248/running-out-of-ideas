@@ -12,11 +12,11 @@ public class CamFollow : MonoBehaviour
     public float viewSizeCap = 120;
     private void Update()
     {
-        if (Player.instance != null)
+        if (Player.singleton != null)
         {
             //TODO :SMOOTH INTERLOP
             //Camera Location
-            transform.position = Player.instance.transform.position + new Vector3(0, 0, 0);
+            transform.position = Player.singleton.transform.position + new Vector3(0, 0, 0);
             //Dynamic camera zoom depending on car speed
             //cam.orthographicSize = Mathf.Min(viewSizeCap, baseCameraSize + (viewMulti * Player.s.rb.velocity.magnitude));
         }

@@ -11,10 +11,10 @@ public class UI_Inventory : MonoBehaviour
         Player.PlayerFired += Used;
         Player.PlayerInventoryChanged += UpdateInventory;
     }
-    public void Used() => slots[Player.instance.currentHeld].UsedItem();
+    public void Used() => slots[Player.singleton.currentHeld].UsedItem();
     public void UpdateInventory()
     {
-        var inv = Player.instance.holding;
+        var inv = Player.singleton.holding;
         for (int i = 0; i < slots.Length; i++)
         {
             if (i < inv.Count)

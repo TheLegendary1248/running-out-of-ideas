@@ -20,18 +20,18 @@ public class EndGoal : MonoBehaviour
     IEnumerator AnimateEnd()
     {
         float timestamp = Time.unscaledTime;
-        Vector3 entryPos = Player.instance.transform.position;
-        Player.instance.YieldToEnd();
+        Vector3 entryPos = Player.singleton.transform.position;
+        Player.singleton.YieldToEnd();
         float interpol = 0f;
         while(interpol < 1f)
         {
             interpol = (Time.unscaledTime - timestamp) / EndAnimationTime;
             //Animate the player smoothly entering exit
-            Player.instance.transform.position = Vector3.Lerp(entryPos, transform.position, interpol * interpol);
+            Player.singleton.transform.position = Vector3.Lerp(entryPos, transform.position, interpol * interpol);
             //Hand control back
             yield return new WaitForEndOfFrame();
         }
-        Player.instance.gameObject.SetActive(false);
+        Player.singleton.gameObject.SetActive(false);
         aud.Play();
         timestamp = Time.unscaledTime;
         Material material = spr.material;

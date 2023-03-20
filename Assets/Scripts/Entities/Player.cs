@@ -10,48 +10,51 @@ public class Player : MonoBehaviour, ICharacter, IWielder
     }
     public int currentHeld { get; set; }
     public ObservableCollection<LauncherInstance> weapons = new ObservableCollection<LauncherInstance>(new LauncherInstance[] { null, null});
-    public Vector2 rate;
+    public Vector2 shrinkRate;
     public static GameObject playerObject;
-    public static Player instance;
+    public static Player singleton;
     [HideInInspector]
     public Rigidbody2D rb;
+    public Collider2D col;
     
-    public AudioSource slideSFX;
+    public AudioSource slideSFX_Src;
     public float maxSpeed;
-    public AnimationCurve slide_curve;
-    public AudioSource impactSFX;
-    public float slide_multi = 0;
+    public AnimationCurve slideCurve;
+    public AudioSource impactSFX_Src;
+    public float slideSFXVolMulti = 0;
     public static Action PlayerInventoryChanged;
     public static Action PlayerFired;
-
-    
-
-    // Start is called before the first frame update
+    #region Unity Messages
     void Start()
     {
-        instance = this;
+        singleton = this;
         rb = GetComponent<Rigidbody2D>();
         weapons.CollectionChanged += (_, _) => PlayerInventoryChanged?.Invoke();
         weapons[0] = new LauncherInstance("Minigun");
         
-        
     }
-
-
     // Update is called once per frame
     void Update()
     {
         void Fire()
         {
+            //Setup shot
             Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             WeaponUseInfo o = new WeaponUseInfo();
             o.user = this;
             o.direction = (pos - (Vector2)transform.position).normalized;
-            o.spawn = (Vector2)transform.position + (o.direction * 2f);
+            //Shots intentionally are on collider bounds+
+            Bounds colliderBounds = col.bounds;
+            colliderBounds.size += new Vector3(1f, 1f);
+            //This can be optimized. Don't
+            float dist = 2f;
+            colliderBounds.IntersectRay(new Ray(transform.position, o.direction), out dist);
+            o.spawn = (Vector2)transform.position - (o.direction * dist);
             if(currentHeld < weapons.Count)weapons[currentHeld]?.Use(o);
             //Affect scale with shot
             Vector2 userScale = transform.localScale;
             transform.localScale = userScale + new Vector2(weapons[0].instance.selfDamage, weapons[0].instance.selfDamage);
+            //Call event
             PlayerFired?.Invoke();
         }
         if (Input.GetMouseButtonDown(0))
@@ -65,39 +68,39 @@ public class Player : MonoBehaviour, ICharacter, IWielder
             Fire();
         }
     }
+    public void FixedUpdate()
+    {
+        //Kill on passing zero
+        transform.localScale = (Vector2)transform.localScale - (shrinkRate * Time.fixedDeltaTime);
+        //Sliding sound effect
+        float speed = rb.velocity.magnitude / maxSpeed;
+        slideSFX_Src.volume = slideSFXVolMulti * Mathf.Min(slideCurve.Evaluate(speed), maxSpeed);
+        slideSFX_Src.pitch = Mathf.Lerp(0.5f, 1f, slideCurve.Evaluate(speed));
+    }
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        impactSFX_Src.volume = Mathf.Min(collision.relativeVelocity.sqrMagnitude / (maxSpeed * maxSpeed), maxSpeed * maxSpeed);
+        impactSFX_Src.Play();
+        foreach(LauncherInstance inst in holding)
+        {
+            if (inst != null) inst.ammo = inst.instance.ammo;
+        }
+        
+
+    }
+    public void OnCollisionStay2D(Collision2D collision)
+    {
+        slideSFXVolMulti = 1;
+    }
+    public void OnCollisionExit2D(Collision2D collision)
+    {
+        slideSFXVolMulti = 0;
+    }
+    #endregion
     ///<summary>Disable player's presence in the world when the level end has been reached</summary>
     public void YieldToEnd()
     {
         rb.simulated = false;
         this.enabled = false;
-    }
-    public void FixedUpdate()
-    {
-        //Kill on passing zero
-        transform.localScale = (Vector2)transform.localScale - (rate * Time.fixedDeltaTime);
-        //Sliding sound effect
-        float speed = rb.velocity.magnitude / maxSpeed;
-        slideSFX.volume = slide_multi * Mathf.Min(slide_curve.Evaluate(speed), maxSpeed);
-        slideSFX.pitch = Mathf.Lerp(0.5f, 1f, slide_curve.Evaluate(speed));
-
-    }
-    public void OnCollisionEnter2D(Collision2D collision)
-    {
-        impactSFX.volume = Mathf.Min(collision.relativeVelocity.sqrMagnitude / (maxSpeed * maxSpeed), maxSpeed * maxSpeed);
-        
-        impactSFX.Play();
-        foreach(LauncherInstance inst in holding)
-        {
-            if (inst != null) inst.ammo = inst.instance.ammo;
-        }
-
-    }
-    public void OnCollisionStay2D(Collision2D collision)
-    {
-        slide_multi = 1;
-    }
-    public void OnCollisionExit2D(Collision2D collision)
-    {
-        slide_multi = 0;
     }
 }

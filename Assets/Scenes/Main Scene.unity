@@ -1076,17 +1076,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3356192796227223212, guid: e29747d6a9220b04c83e710866b9d354, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3881629355673886143, guid: e29747d6a9220b04c83e710866b9d354, type: 3}
       propertyPath: m_Name
       value: Primary Slot
-      objectReference: {fileID: 0}
-    - target: {fileID: 7920979234206550441, guid: e29747d6a9220b04c83e710866b9d354, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e29747d6a9220b04c83e710866b9d354, type: 3}
