@@ -19,8 +19,11 @@ public class UI_ItemSlot : MonoBehaviour
     }
     public void SetItem(SO_Launcher item)
     {
-        itemRef = item;
-        StartCoroutine(AnimateGet());
+        if(itemRef != item)
+        {
+            itemRef = item;
+            StartCoroutine(AnimateGet());
+        }
     }
     public void RemoveItem()
     {

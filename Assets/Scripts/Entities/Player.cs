@@ -1,14 +1,15 @@
 using UnityEngine;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 public class Player : MonoBehaviour, ICharacter, IWielder
 {
-    public ObservableCollection<SO_Launcher> holding { 
-        get { return weapons; } 
-        set { weapons = value; } 
+    public ObservableCollection<SO_Launcher> holding {
+        get { return weapons; }
+        set { weapons = value; }
     }
     public int currentHeld { get; set; }
-    public ObservableCollection<SO_Launcher> weapons = new ObservableCollection<SO_Launcher>();
+    public ObservableCollection<SO_Launcher> weapons = new ObservableCollection<SO_Launcher>(new SO_Launcher[] { null, null});
     public Vector2 rate;
     public static GameObject playerObject;
     public static Player instance;
@@ -31,7 +32,7 @@ public class Player : MonoBehaviour, ICharacter, IWielder
         instance = this;
         rb = GetComponent<Rigidbody2D>();
         weapons.CollectionChanged += (_, _) => PlayerInventoryChanged?.Invoke();
-        weapons.Add(SO_Launcher.GetLauncher("Minigun"));
+        weapons[0] = SO_Launcher.GetLauncher("Minigun");
         
         
     }
