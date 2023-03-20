@@ -10,12 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f6ece63cee43af64694bb028c11d151f, type: 3}
-  m_Name: Gun
+  m_Name: Radii
   m_EditorClassIdentifier: 
-  prefabReferences: []
-  damage: 0
-  ammo: 0
-  knockback: 0
-  fireRate: 0
-  force: 0
-  selfDamage: 0
+  projectile: {fileID: 2165933180524535235, guid: 3a85de23eec2d464f991e16ad2f0a2bc, type: 3}
+  ammo: 2
+  knockback: 10
+  selfDamage: 0.3

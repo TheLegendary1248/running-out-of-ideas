@@ -10,10 +10,11 @@ public class UI_ItemSlot : MonoBehaviour
 {
     public TextMeshProUGUI tmp;
     public Image img;
-    public Launcher itemRef;
+    public SO_Launcher itemRef;
     List<Coroutine> routines;
-    public void SetItem()
+    public void SetItem(SO_Launcher item)
     {
+        itemRef = item;
         StartCoroutine(AnimateGet());
     }
     public void RemoveItem()
@@ -49,7 +50,7 @@ public class UI_ItemSlot : MonoBehaviour
         const float time = 0.5f;
         float timeStamp = Time.fixedTime;
         float timeDif = Time.fixedTime - time;
-        string itemName = "Weapon Name";
+        string itemName = itemRef.name;
         while(timeDif < timeStamp)
         {
             float range = (Time.fixedTime - timeStamp) / time;

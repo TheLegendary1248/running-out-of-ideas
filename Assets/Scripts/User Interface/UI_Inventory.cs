@@ -7,12 +7,23 @@ public class UI_Inventory : MonoBehaviour
 {
     public UI_ItemSlot primary;
     public UI_ItemSlot secondary;
-    public void Update()
+    public void Awake()
     {
-        if(Input.GetMouseButtonDown(0))
-        {
-            primary.UsedItem();
-        }
+        Player.PlayerFired += Used;
+        Player.PlayerInventoryChanged += UpdateInventory;
     }
-
+    public void Used() => primary.UsedItem();
+    public void UpdateInventory()
+    {
+        var inv = Player.instance.holding;
+        if(inv.Count > 0)
+        {
+            primary.SetItem(Player.instance.holding[0]);
+        }
+        if(inv.Count > 1)
+        {
+            secondary.SetItem(Player.instance.holding[1]);
+        }
+        
+    }
 }

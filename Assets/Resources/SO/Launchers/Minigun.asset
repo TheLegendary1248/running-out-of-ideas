@@ -12,11 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6ece63cee43af64694bb028c11d151f, type: 3}
   m_Name: Minigun
   m_EditorClassIdentifier: 
-  prefabReferences:
-  - Radii
-  damage: 1
+  projectile: {fileID: 6166866650073550335, guid: dcc0e5eb7f454c14186e3cd110ad117f, type: 3}
   ammo: 16
-  knockback: 10
-  fireRate: 0
-  force: 30
+  knockback: 5
   selfDamage: 0.2

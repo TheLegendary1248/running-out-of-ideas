@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class Pickup : MonoBehaviour
 {
+    public string weapon;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //detect player
+        IWielder wielder = collision.gameObject.GetComponent<IWielder>();
+        if(wielder != null)
+        {
+            wielder.holding[0] = SO_Launcher.GetLauncher(weapon);
+        }
     }
 }

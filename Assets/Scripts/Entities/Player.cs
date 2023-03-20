@@ -1,30 +1,41 @@
- using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System;
-using System.Dynamic;
-public class Player : MonoBehaviour, ICharacter
+using System.Collections.ObjectModel;
+public class Player : MonoBehaviour, ICharacter, IWielder
 {
+    public ObservableCollection<SO_Launcher> holding { 
+        get { return weapons; } 
+        set { weapons = value; } 
+    }
+    public int currentHeld { get; set; }
+    public ObservableCollection<SO_Launcher> weapons = new ObservableCollection<SO_Launcher>();
     public Vector2 rate;
     public static GameObject playerObject;
     public static Player instance;
     [HideInInspector]
     public Rigidbody2D rb;
-    public SO_Launcher[] weps = new SO_Launcher[2];
+    
     public AudioSource slideSFX;
     public float maxSpeed;
     public AnimationCurve slide_curve;
     public AudioSource impactSFX;
     public float slide_multi = 0;
+    public static Action PlayerInventoryChanged;
+    public static Action PlayerFired;
+
     
+
     // Start is called before the first frame update
     void Start()
     {
-
-        weps[0] = SO_Launcher.GetLauncher("Minigun");
         instance = this;
         rb = GetComponent<Rigidbody2D>();
+        weapons.CollectionChanged += (_, _) => PlayerInventoryChanged?.Invoke();
+        weapons.Add(SO_Launcher.GetLauncher("Minigun"));
+        
+        
     }
+
 
     // Update is called once per frame
     void Update()
@@ -36,10 +47,11 @@ public class Player : MonoBehaviour, ICharacter
             o.user = this;
             o.direction = (pos - (Vector2)transform.position).normalized;
             o.spawn = (Vector2)transform.position + (o.direction * 2f);
-            weps[0].Use(o);
+            weapons[0].Use(o);
             //Affect scale with shot
             Vector2 userScale = transform.localScale;
-            transform.localScale = userScale + new Vector2(weps[0].selfDamage, weps[0].selfDamage);
+            transform.localScale = userScale + new Vector2(weapons[0].selfDamage, weapons[0].selfDamage);
+            PlayerFired?.Invoke();
         }
     }
     ///<summary>Disable player's presence in the world when the level end has been reached</summary>
@@ -56,6 +68,7 @@ public class Player : MonoBehaviour, ICharacter
         float speed = rb.velocity.magnitude / maxSpeed;
         slideSFX.volume = slide_multi * Mathf.Min(slide_curve.Evaluate(speed), maxSpeed);
         slideSFX.pitch = Mathf.Lerp(0.5f, 1f, slide_curve.Evaluate(speed));
+
     }
     public void OnCollisionEnter2D(Collision2D collision)
     {
