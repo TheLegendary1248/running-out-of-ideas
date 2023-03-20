@@ -25,3 +25,17 @@ public class SO_Launcher : ScriptableObject
         return (SO_Launcher)Resources.Load(Settings.commonPathNames["Launchers"] + $"/{name}");
     }
 }
+public class LauncherInstance
+{
+    public int ammo;
+    public SO_Launcher instance;
+    public LauncherInstance(string name)
+    {
+        instance = (SO_Launcher)Resources.Load(Settings.commonPathNames["Launchers"] + $"/{name}");
+        ammo = instance.ammo;
+    }
+    public void Use(dynamic param)
+    {
+        instance.Use(param);
+    }
+}

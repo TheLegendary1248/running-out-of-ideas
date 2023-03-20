@@ -10,14 +10,15 @@ public class UI_ItemSlot : MonoBehaviour
 {
     public TextMeshProUGUI tmp;
     public Image img;
-    public SO_Launcher itemRef;
+    public Image ammoImg;
+    public LauncherInstance itemRef;
     static Sprite def;
     List<Coroutine> routines;
     public void Awake()
     {
         def = img.sprite;
     }
-    public void SetItem(SO_Launcher item)
+    public void SetItem(LauncherInstance item)
     {
         if(itemRef != item)
         {
@@ -39,17 +40,18 @@ public class UI_ItemSlot : MonoBehaviour
         const float time = 0.25f;
         float timeStamp = Time.fixedTime;
         float timeDif = Time.fixedTime - time;
+        ammoImg.transform.localScale = new Vector2(/*itemRef.ammo / itemRef.instance.ammo*/ Random.value, 1f);
         while (timeDif < timeStamp)
         {
             float range = (Time.fixedTime - timeStamp) / time;
             //Lerp Color
-            img.color = Color.Lerp(itemRef ? Color.cyan : Color.red , itemRef ? Color.white : Color.gray, range);
+            img.color = Color.Lerp(itemRef != null ? Color.cyan : Color.red , itemRef != null ? Color.white : Color.gray, range);
             //Iterate
             yield return new WaitForFixedUpdate();
             timeDif = Time.fixedTime - time;
         }
         //End State
-        img.color = itemRef ? Color.white : Color.gray;
+        img.color = itemRef != null ? Color.white : Color.gray;
         yield return null;
     }
     //Animates get of an item on the UI
@@ -65,7 +67,7 @@ public class UI_ItemSlot : MonoBehaviour
         const float time = 0.5f;
         float timeStamp = Time.fixedTime;
         float timeDif = Time.fixedTime - time;
-        string itemName = itemRef.name;
+        string itemName = itemRef.instance.name;
         
         while(timeDif < timeStamp)
         {

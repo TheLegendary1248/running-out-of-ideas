@@ -10,7 +10,7 @@ public class Pickup : MonoBehaviour
         IWielder wielder = collision.gameObject.GetComponent<IWielder>();
         if(wielder != null)
         {
-            wielder.holding[wielder.currentHeld] = SO_Launcher.GetLauncher(weapon);
+            wielder.holding[wielder.currentHeld] = new LauncherInstance(weapon);
         }
     }
 }

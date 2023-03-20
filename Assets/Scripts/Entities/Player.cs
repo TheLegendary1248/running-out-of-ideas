@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 public class Player : MonoBehaviour, ICharacter, IWielder
 {
-    public ObservableCollection<SO_Launcher> holding {
+    public ObservableCollection<LauncherInstance> holding {
         get { return weapons; }
         set { weapons = value; }
     }
     public int currentHeld { get; set; }
-    public ObservableCollection<SO_Launcher> weapons = new ObservableCollection<SO_Launcher>(new SO_Launcher[] { null, null});
+    public ObservableCollection<LauncherInstance> weapons = new ObservableCollection<LauncherInstance>(new LauncherInstance[] { null, null});
     public Vector2 rate;
     public static GameObject playerObject;
     public static Player instance;
@@ -32,7 +32,7 @@ public class Player : MonoBehaviour, ICharacter, IWielder
         instance = this;
         rb = GetComponent<Rigidbody2D>();
         weapons.CollectionChanged += (_, _) => PlayerInventoryChanged?.Invoke();
-        weapons[0] = SO_Launcher.GetLauncher("Minigun");
+        weapons[0] = new LauncherInstance("Minigun");
         
         
     }
@@ -51,7 +51,7 @@ public class Player : MonoBehaviour, ICharacter, IWielder
             if(currentHeld < weapons.Count)weapons[currentHeld]?.Use(o);
             //Affect scale with shot
             Vector2 userScale = transform.localScale;
-            transform.localScale = userScale + new Vector2(weapons[0].selfDamage, weapons[0].selfDamage);
+            transform.localScale = userScale + new Vector2(weapons[0].instance.selfDamage, weapons[0].instance.selfDamage);
             PlayerFired?.Invoke();
         }
         if (Input.GetMouseButtonDown(0))
