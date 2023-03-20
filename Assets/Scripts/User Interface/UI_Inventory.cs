@@ -5,25 +5,23 @@ using UnityEngine.UI;
 ///<summary>Main interface to control the player's Inventory UI</summary>
 public class UI_Inventory : MonoBehaviour
 {
-    public UI_ItemSlot primary;
-    public UI_ItemSlot secondary;
+    public UI_ItemSlot[] slots;
     public void Awake()
     {
         Player.PlayerFired += Used;
         Player.PlayerInventoryChanged += UpdateInventory;
     }
-    public void Used() => primary.UsedItem();
+    public void Used() => slots[Player.instance.currentHeld].UsedItem();
     public void UpdateInventory()
     {
         var inv = Player.instance.holding;
-        if(inv.Count > 0)
+        for (int i = 0; i < slots.Length; i++)
         {
-            primary.SetItem(Player.instance.holding[0]);
+            if (i < inv.Count)
+            {
+                slots[i].SetItem(inv[i]);
+            }
+            else slots[i].SetItem(null);
         }
-        if(inv.Count > 1)
-        {
-            secondary.SetItem(Player.instance.holding[1]);
-        }
-        
     }
 }

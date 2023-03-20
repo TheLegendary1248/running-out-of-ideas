@@ -11,7 +11,12 @@ public class UI_ItemSlot : MonoBehaviour
     public TextMeshProUGUI tmp;
     public Image img;
     public SO_Launcher itemRef;
+    static Sprite def;
     List<Coroutine> routines;
+    public void Awake()
+    {
+        def = img.sprite;
+    }
     public void SetItem(SO_Launcher item)
     {
         itemRef = item;
@@ -35,22 +40,30 @@ public class UI_ItemSlot : MonoBehaviour
         {
             float range = (Time.fixedTime - timeStamp) / time;
             //Lerp Color
-            img.color = Color.Lerp(Color.cyan,Color.white, range);
+            img.color = Color.Lerp(itemRef ? Color.cyan : Color.red , itemRef ? Color.white : Color.gray, range);
             //Iterate
             yield return new WaitForFixedUpdate();
             timeDif = Time.fixedTime - time;
         }
         //End State
-        img.color = Color.white;
+        img.color = itemRef ? Color.white : Color.gray;
         yield return null;
     }
     //Animates get of an item on the UI
     IEnumerator AnimateGet()
     {
+        if (itemRef == null)
+        {
+            tmp.text = "";
+            img.color = Color.gray;
+
+            yield break;
+        }
         const float time = 0.5f;
         float timeStamp = Time.fixedTime;
         float timeDif = Time.fixedTime - time;
         string itemName = itemRef.name;
+        
         while(timeDif < timeStamp)
         {
             float range = (Time.fixedTime - timeStamp) / time;

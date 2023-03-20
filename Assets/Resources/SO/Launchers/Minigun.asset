@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Minigun
   m_EditorClassIdentifier: 
   projectile: {fileID: 6166866650073550335, guid: dcc0e5eb7f454c14186e3cd110ad117f, type: 3}
-  ammo: 16
+  ammo: 6
   knockback: 5
   selfDamage: 0.2

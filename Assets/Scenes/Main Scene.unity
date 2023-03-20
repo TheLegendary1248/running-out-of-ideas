@@ -313,8 +313,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c33e12c1fae3b3e48b60bb9dc80ffe80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  primary: {fileID: 1941736563}
-  secondary: {fileID: 5452360371748381617}
+  slots:
+  - {fileID: 1941736563}
+  - {fileID: 5452360371748381617}
 --- !u!1 &519658676
 GameObject:
   m_ObjectHideFlags: 0
@@ -855,10 +856,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 98988661}
     m_Modifications:
-    - target: {fileID: 1222229525575453611, guid: e29747d6a9220b04c83e710866b9d354, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2952358474262481983, guid: e29747d6a9220b04c83e710866b9d354, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1016,10 +1013,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 98988661}
     m_Modifications:
-    - target: {fileID: 1222229525575453611, guid: e29747d6a9220b04c83e710866b9d354, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2952358474262481983, guid: e29747d6a9220b04c83e710866b9d354, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

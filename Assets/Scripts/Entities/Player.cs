@@ -40,18 +40,28 @@ public class Player : MonoBehaviour, ICharacter, IWielder
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        void Fire()
         {
             Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             WeaponUseInfo o = new WeaponUseInfo();
             o.user = this;
             o.direction = (pos - (Vector2)transform.position).normalized;
             o.spawn = (Vector2)transform.position + (o.direction * 2f);
-            weapons[0].Use(o);
+            if(currentHeld < weapons.Count)weapons[currentHeld]?.Use(o);
             //Affect scale with shot
             Vector2 userScale = transform.localScale;
             transform.localScale = userScale + new Vector2(weapons[0].selfDamage, weapons[0].selfDamage);
             PlayerFired?.Invoke();
+        }
+        if (Input.GetMouseButtonDown(0))
+        {
+            currentHeld = 0;
+            Fire();
+        }
+        if (Input.GetMouseButtonDown(1))
+        {
+            currentHeld = 1;
+            Fire();
         }
     }
     ///<summary>Disable player's presence in the world when the level end has been reached</summary>
