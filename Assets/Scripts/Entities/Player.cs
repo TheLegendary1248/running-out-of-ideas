@@ -80,14 +80,15 @@ public class Player : MonoBehaviour, ICharacter, IWielder
     }
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        
-        impactSFX_Src.volume = Mathf.Min(collision.relativeVelocity.sqrMagnitude / (maxSpeed * maxSpeed), maxSpeed * maxSpeed);
+        //Cheap and relatively ok way to check the true force of the impact
+        Vector2 impactForce = collision.relativeVelocity * Vector2.Dot(collision.relativeVelocity.normalized, collision.GetContact(0).normal);
+        impactSFX_Src.volume = Mathf.Min(impactForce.sqrMagnitude / (maxSpeed * maxSpeed), maxSpeed * maxSpeed);
         impactSFX_Src.Play();
         foreach(LauncherInstance inst in holding)
         {
             if (inst != null) inst.ammo = inst.instance.ammo;
         }
-        if(collision.relativeVelocity.sqrMagnitude > killSpeed * killSpeed) //Make sure to test all collisions
+        if(impactForce.sqrMagnitude > killSpeed * killSpeed) //Make sure to test all collisions
         {
             Kill();
             return;
