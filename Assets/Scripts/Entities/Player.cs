@@ -16,7 +16,8 @@ public class Player : MonoBehaviour, ICharacter, IWielder
     [HideInInspector]
     public Rigidbody2D rb;
     public Collider2D col;
-    
+    ///<summary>Speed at which the player will be killed</summary>
+    public float killSpeed;
     public AudioSource slideSFX_Src;
     public float maxSpeed;
     public AnimationCurve slideCurve;
@@ -79,14 +80,18 @@ public class Player : MonoBehaviour, ICharacter, IWielder
     }
     public void OnCollisionEnter2D(Collision2D collision)
     {
+        
         impactSFX_Src.volume = Mathf.Min(collision.relativeVelocity.sqrMagnitude / (maxSpeed * maxSpeed), maxSpeed * maxSpeed);
         impactSFX_Src.Play();
         foreach(LauncherInstance inst in holding)
         {
             if (inst != null) inst.ammo = inst.instance.ammo;
         }
-        
-
+        if(collision.relativeVelocity.sqrMagnitude > killSpeed * killSpeed) //Make sure to test all collisions
+        {
+            Kill();
+            return;
+        }
     }
     public void OnCollisionStay2D(Collision2D collision)
     {
@@ -95,6 +100,10 @@ public class Player : MonoBehaviour, ICharacter, IWielder
     public void OnCollisionExit2D(Collision2D collision)
     {
         slideSFXVolMulti = 0;
+    }
+    public void Kill()
+    {
+        Debug.LogWarning("we should be dead");
     }
     #endregion
     ///<summary>Disable player's presence in the world when the level end has been reached</summary>
