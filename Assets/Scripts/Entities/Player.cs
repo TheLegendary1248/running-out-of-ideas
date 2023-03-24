@@ -1,6 +1,6 @@
 using UnityEngine;
 using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.Collections.ObjectModel;
 public class Player : MonoBehaviour, ICharacter, IWielder
 {
@@ -25,6 +25,7 @@ public class Player : MonoBehaviour, ICharacter, IWielder
     public float slideSFXVolMulti = 0;
     public static Action PlayerInventoryChanged;
     public static Action PlayerFired;
+    public PhysicsMaterial2D self;
     #region Unity Messages
     void Start()
     {
@@ -34,12 +35,19 @@ public class Player : MonoBehaviour, ICharacter, IWielder
         weapons[0] = new LauncherInstance("Minigun");
         
     }
+    IEnumerator FixInAMoment()
+    {
+        yield return new WaitForSeconds(0.2f);
+        self.bounciness = 0.33f;
+    }
     // Update is called once per frame
     void Update()
     {
         void Fire()
         {
             //Setup shot
+            StartCoroutine(FixInAMoment());
+            self.bounciness = 1.0f;
             Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             WeaponUseInfo o = new WeaponUseInfo();
             o.user = this;

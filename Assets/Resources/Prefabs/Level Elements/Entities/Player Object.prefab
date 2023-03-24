@@ -64,6 +64,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   impactSFX_Src: {fileID: 5955215948526642687}
   slideSFXVolMulti: 0
+  self: {fileID: 6200000, guid: f40eb59d5ef387042828e6f419efdbce, type: 2}
 --- !u!212 &3590249784154979348
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -125,7 +126,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 3590249784154979351}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: f40eb59d5ef387042828e6f419efdbce, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0

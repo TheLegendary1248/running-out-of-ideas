@@ -17,7 +17,7 @@ public class SO_Launcher : ScriptableObject
         WeaponUseInfo p = param;
         p.user.GetComponent<Rigidbody2D>()?.AddForce(-knockback * p.direction, ForceMode2D.Impulse);
         GameObject gb = Instantiate(projectile, p.spawn, Quaternion.LookRotation(Vector3.forward, p.direction));
-        gb.GetComponent<Rigidbody2D>().AddForce(p.direction * knockback, ForceMode2D.Impulse);
+        gb.GetComponent<Rigidbody2D>().AddForce(p.direction * knockback * 2f, ForceMode2D.Impulse);
         
     }
     public static SO_Launcher GetLauncher(string name)

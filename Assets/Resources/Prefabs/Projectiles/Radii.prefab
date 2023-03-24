@@ -247,8 +247,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a1bd88fe47276b4c8d7e5cc17886469, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 1
-  radius: 5
+  time: 0.75
+  radius: 10
   fuse: 0
   rb: {fileID: 2165933180524535234}
   fx: {fileID: 5912052079762122327}

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectile: {fileID: 2165933180524535235, guid: 3a85de23eec2d464f991e16ad2f0a2bc, type: 3}
   ammo: 2
-  knockback: 10
+  knockback: 30
   selfDamage: 0.3
