@@ -4,6 +4,6 @@ using System.Collections.ObjectModel;
 /// </summary>
 public interface IWielder
 {
-    public ObservableCollection<LauncherInstance> holding { get; set; }
+    public ObservableCollection<LauncherInstance> holding { get; set; }  
     public int currentHeld { get; set; }
 }
