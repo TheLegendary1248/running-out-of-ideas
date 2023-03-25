@@ -8,18 +8,22 @@ public class Turret : MonoBehaviour
 {
     public bool requireSight;
     public float range;
+    public LauncherInstance Launcher;
     
-    
-    public GameObject projectile;
     // Start is called before the first frame update
     void Start()
     {
         
     }
-
+    void UseWeapon()
+    {
+        
+        Launcher.Use(new WeaponUseInfo(this, Vector2.zero));
+    }
     // Update is called once per frame
     void Update()
     {
         
     }
+    
 }

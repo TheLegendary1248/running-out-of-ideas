@@ -30,9 +30,19 @@ public struct WeaponUseInfo
     ///<summary>The entity that spawned the object</summary>
     public MonoBehaviour user;
     ///<summary>The intended spawn location of the object</summary>
-    public Vector2 spawn;
+    public Vector2 origin;
     ///<summary>The intended direction in which the weapon should be used</summary>
     public Vector2 direction;
     ///<summary>Miscellanous information that should be passed. Namely an ExpandoObject</summary>
     public dynamic options;
+
+    /// <param name="self">The monobehaviour creating this</param>
+    /// <param name="dir">The given direction of the projectile</param>
+    public WeaponUseInfo(MonoBehaviour self, Vector2 dir)
+    {
+        this.user = self;
+        this.origin = self.gameObject.transform.position;
+        this.direction = dir;
+        this.options = null;
+    }
 }

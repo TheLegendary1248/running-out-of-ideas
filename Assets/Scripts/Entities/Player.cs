@@ -58,7 +58,7 @@ public class Player : MonoBehaviour, ICharacter, IWielder
             //This can be optimized. Don't
             float dist = 2f;
             colliderBounds.IntersectRay(new Ray(transform.position, o.direction), out dist);
-            o.spawn = (Vector2)transform.position - (o.direction * dist);
+            o.origin = (Vector2)transform.position - (o.direction * dist);
             if(currentHeld < weapons.Count)weapons[currentHeld]?.Use(o);
             //Affect scale with shot
             Vector2 userScale = transform.localScale;

@@ -16,7 +16,7 @@ public class SO_Launcher : ScriptableObject
     {
         WeaponUseInfo p = param;
         p.user.GetComponent<Rigidbody2D>()?.AddForce(-knockback * p.direction, ForceMode2D.Impulse);
-        GameObject gb = Instantiate(projectile, p.spawn, Quaternion.LookRotation(Vector3.forward, p.direction));
+        GameObject gb = Instantiate(projectile, p.origin, Quaternion.LookRotation(Vector3.forward, p.direction));
         gb.GetComponent<Rigidbody2D>().AddForce(p.direction * knockback * 2f, ForceMode2D.Impulse);
         
     }
@@ -25,6 +25,7 @@ public class SO_Launcher : ScriptableObject
         return (SO_Launcher)Resources.Load(Settings.commonPathNames["Launchers"] + $"/{name}");
     }
 }
+//this is obviously terrible, don't be a retard and fix this at some point before it's too late
 public class LauncherInstance
 {
     public int ammo;
