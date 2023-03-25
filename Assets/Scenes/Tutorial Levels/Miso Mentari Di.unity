@@ -404,6 +404,10 @@ PrefabInstance:
       value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 3590249784154979562, guid: d6e7af66660316841b3fea4d998f0694, type: 3}
+      propertyPath: sizeWarnSFX_Src
+      value: 
+      objectReference: {fileID: 1295205290}
+    - target: {fileID: 3590249784154979562, guid: d6e7af66660316841b3fea4d998f0694, type: 3}
       propertyPath: weps.Array.data[0]
       value: 
       objectReference: {fileID: 11400000, guid: bde24b509180c0140840609e0fd43a6a, type: 2}
@@ -480,6 +484,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4880056650284445114, guid: d6e7af66660316841b3fea4d998f0694, type: 3}
+      propertyPath: m_Pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4880056650284445114, guid: d6e7af66660316841b3fea4d998f0694, type: 3}
       propertyPath: m_Volume
       value: 0
       objectReference: {fileID: 0}
@@ -491,6 +499,18 @@ PrefabInstance:
       propertyPath: m_Pitch
       value: 1.69
       objectReference: {fileID: 0}
+    - target: {fileID: 8064887958641855911, guid: d6e7af66660316841b3fea4d998f0694, type: 3}
+      propertyPath: m_Pitch
+      value: 1.96
+      objectReference: {fileID: 0}
+    - target: {fileID: 8064887958641855911, guid: d6e7af66660316841b3fea4d998f0694, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8064887958641855911, guid: d6e7af66660316841b3fea4d998f0694, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: -1529225477946735313, guid: 379420b5513be7c4f89bfad175b8a00e, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6e7af66660316841b3fea4d998f0694, type: 3}
 --- !u!1001 &623731383
@@ -733,6 +753,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1295205290 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 8064887958641855911, guid: d6e7af66660316841b3fea4d998f0694, type: 3}
+  m_PrefabInstance: {fileID: 557786696}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1302589368
 PrefabInstance:
   m_ObjectHideFlags: 0

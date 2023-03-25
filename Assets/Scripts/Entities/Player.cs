@@ -22,10 +22,14 @@ public class Player : MonoBehaviour, ICharacter, IWielder
     public float maxSpeed;
     public AnimationCurve slideCurve;
     public AudioSource impactSFX_Src;
+    public AudioSource sizeWarnSFX_Src;
     public float slideSFXVolMulti = 0;
     public static Action PlayerInventoryChanged;
     public static Action PlayerFired;
     public PhysicsMaterial2D self;
+
+    public Vector2 origin;
+    public Vector2 scale;
     #region Unity Messages
     void Start()
     {
@@ -33,7 +37,9 @@ public class Player : MonoBehaviour, ICharacter, IWielder
         rb = GetComponent<Rigidbody2D>();
         weapons.CollectionChanged += (_, _) => PlayerInventoryChanged?.Invoke();
         weapons[0] = new LauncherInstance("Minigun");
-        
+        //Rough
+        origin = transform.position;
+        scale = transform.localScale;    
     }
     IEnumerator FixInAMoment()
     {
@@ -79,8 +85,21 @@ public class Player : MonoBehaviour, ICharacter, IWielder
     }
     public void FixedUpdate()
     {
-        //Kill on passing zero
-        transform.localScale = (Vector2)transform.localScale - (shrinkRate * Time.fixedDeltaTime);
+        //TODO: Kill on crossing zero
+        Vector2 loss = shrinkRate * Time.fixedDeltaTime;
+        transform.localScale = (Vector2)transform.localScale - loss;
+        Vector2 selfScale = transform.localScale;
+        float min;
+        if (selfScale.x < 0 | selfScale.y < 0)
+        {
+            Kill();
+            return;
+        }
+        else if (1f > (min = Mathf.Min(selfScale.x,selfScale.y)))
+        {
+            sizeWarnSFX_Src.volume = (1 - min) * 0.05f;
+        }
+        else sizeWarnSFX_Src.volume = 0;
         //Sliding sound effect
         float speed = rb.velocity.magnitude / maxSpeed;
         slideSFX_Src.volume = slideSFXVolMulti * Mathf.Min(slideCurve.Evaluate(speed), maxSpeed);
@@ -110,11 +129,13 @@ public class Player : MonoBehaviour, ICharacter, IWielder
     {
         slideSFXVolMulti = 0;
     }
+    
+    #endregion
     public void Kill()
     {
-        Debug.LogWarning("we should be dead");
+        transform.position = origin;
+        transform.localScale = scale;
     }
-    #endregion
     ///<summary>Disable player's presence in the world when the level end has been reached</summary>
     public void YieldToEnd()
     {
