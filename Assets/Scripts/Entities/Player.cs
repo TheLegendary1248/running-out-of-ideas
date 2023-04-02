@@ -97,7 +97,7 @@ public class Player : MonoBehaviour, ICharacter, IWielder
         }
         else if (1f > (min = Mathf.Min(selfScale.x,selfScale.y)))
         {
-            sizeWarnSFX_Src.volume = (1 - min) * 0.05f;
+            sizeWarnSFX_Src.volume = (1 - min) * 0.02f;
         }
         else sizeWarnSFX_Src.volume = 0;
         //Sliding sound effect

@@ -15,7 +15,8 @@ public class SO_Launcher : ScriptableObject
     public virtual void Use(dynamic param)
     {
         WeaponUseInfo p = param;
-        p.user.GetComponent<Rigidbody2D>()?.AddForce(-knockback * p.direction, ForceMode2D.Impulse);
+        Rigidbody2D rb = p.user.GetComponent<Rigidbody2D>();
+        if(rb) rb.AddForce(-knockback * p.direction, ForceMode2D.Impulse);
         GameObject gb = Instantiate(projectile, p.origin, Quaternion.LookRotation(Vector3.forward, p.direction));
         gb.GetComponent<Rigidbody2D>().AddForce(p.direction * knockback * 2f, ForceMode2D.Impulse);
         

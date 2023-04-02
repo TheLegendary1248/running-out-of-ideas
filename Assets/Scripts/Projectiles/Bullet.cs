@@ -11,8 +11,9 @@ public class Bullet : MonoBehaviour
     {
         GetComponent<Rigidbody2D>().AddForce(transform.up * 40f);
     }
-    private void OnCollisionEnter2D()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
+        //collision.gameObject.GetComponent<>
         Destroy(gameObject);
     }
 }
