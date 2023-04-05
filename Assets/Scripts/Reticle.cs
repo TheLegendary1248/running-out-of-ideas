@@ -4,31 +4,38 @@ using UnityEngine;
 //Class for the custom reticle, and programmatically animated for the sake of being EYE CANDY
 public class Reticle: MonoBehaviour
 {
-    public Camera cam;
+    public float minSize;
+    public float maxSize;
+    [Range(0, 1)]
+    public float lerp;
+    public Camera c_camera;
     // Start is called before the first frame update
     void Start()
     {
-        cam = Camera.main;
+        c_camera = Camera.main;
     }
     void Update()
     {
-        if (!cam)
+        if (!c_camera)
         {
-            cam = Camera.main;
+            c_camera = Camera.main;
         }
         else
         {
-            transform.position = (Vector2)cam.ScreenToWorldPoint(Input.mousePosition);
+            transform.position = (Vector2)c_camera.ScreenToWorldPoint(Input.mousePosition);
         }
+        //TODO: Connect to actual weapon firing
         if (Input.GetMouseButtonDown(0))
         {
-            transform.localScale = new Vector2(0.6f, 0.6f);
+            SetSize(maxSize);
         }
     }
+    void SetSize(float size) => transform.localScale = new Vector2(size, size) * Camera.main.orthographicSize * 0.01f;
+    
     //TODO: DONT HARDCODE
     //AND MAKE SCALE WITH SCREEN
     private void FixedUpdate()
     {
-        transform.localScale = Vector2.Lerp(new Vector2(0.3f, 0.3f), transform.localScale, 0.75f);
+        SetSize(Mathf.Lerp(minSize, transform.localScale.x / Camera.main.orthographicSize / 0.01f, lerp));
     }
 }

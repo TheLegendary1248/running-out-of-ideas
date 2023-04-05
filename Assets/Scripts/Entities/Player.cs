@@ -120,7 +120,7 @@ public class Player : MonoBehaviour, ICharacter, IWielder
             Kill();
             return;
         }
-        CamFollow.CamShake(0.1f * (impactForce.magnitude / killSpeed));
+        CamFollow.CameraShake(0.1f * (impactForce.magnitude / killSpeed));
     }
     public void OnCollisionStay2D(Collision2D collision)
     {

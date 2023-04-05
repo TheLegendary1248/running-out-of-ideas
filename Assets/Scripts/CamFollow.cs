@@ -5,36 +5,36 @@ using UnityEngine;
 public class CamFollow : MonoBehaviour
 {
     public static CamFollow main;
-    public Camera cam;
-    ///<summary>The amount the car's velocity is multiplied by, then added onto the camera's position</summary>
-    public float lookAheadMulti = 1.5f;
+    [SerializeField] Camera c_camera;
     public float baseCameraSize = 50f;
     public float viewMulti = 0.25f;
     public float viewSizeCap = 120;
-    public static float Shake = 0f;
+    [Range(0, 1)]
+    public float sizeLerp = 0f;
+    public static float shake = 0f;
     //UNUSED - SET WITH SETTINGS
     public static float ShakeMulti = 1;
     private void Update()
     {
         if (Player.singleton != null)
         {
-            //TODO :SMOOTH INTERLOP
-            //Camera Location
-            transform.position = Player.singleton.transform.position + new Vector3(0, 0, 0) + (Vector3)(Shake * 10f * Random.insideUnitCircle);
-            //Dynamic camera zoom depending on car speed
-            //cam.orthographicSize = Mathf.Min(viewSizeCap, baseCameraSize + (viewMulti * Player.s.rb.velocity.magnitude));
+            //Calculate Camera position and ortho size
+            transform.position = Player.singleton.transform.position + new Vector3(0, 0, 0) + (Vector3)(shake * 10f * Random.insideUnitCircle);
+            
+            c_camera.orthographicSize = 
+                //Smooth lerp to new size
+                Mathf.Lerp(c_camera.orthographicSize,
+                    //Calculate size based on speed with cap
+                    Mathf.Min(viewSizeCap, baseCameraSize + (viewMulti * Player.singleton.rb.velocity.magnitude))
+                , 0.05f);
         }
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            Shake += 0.1f;
-        }
-        Shake -= Time.deltaTime;
-        Shake = Mathf.Max(0, Shake);
+        //Reduce shake
+        shake -= Time.deltaTime;
+        shake = Mathf.Max(0, shake);
     }
-    //Go figure
     /// <summary>
-    /// Shakes the Camera
+    /// Shakes the camera
     /// </summary>
-    /// <param name="m"></param>
-    public static void CamShake(float m) => Shake = Mathf.Max(m, Shake);
+    /// <param name="seconds"></param>
+    public static void CameraShake(float seconds) => shake = Mathf.Max(seconds, shake);
 }
