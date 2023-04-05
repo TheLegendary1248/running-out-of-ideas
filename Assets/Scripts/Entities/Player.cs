@@ -54,21 +54,30 @@ public class Player : MonoBehaviour, ICharacter, IWielder
             //Setup shot
             StartCoroutine(FixInAMoment());
             self.bounciness = 1.0f;
-            Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 cursorPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 cursorDir = cursorPos - (Vector2)transform.position;
+            //Affect scale with shot - probably extract this out as a util function for the future
+            Vector2 transformDir = transform.up;
+            float dif = Mathf.Asin(Vector2.Dot(transformDir, cursorDir.normalized));
+            dif /= Mathf.PI / 2f;
+            dif = Mathf.Abs(dif);
+            Vector2 userScale = transform.localScale;
+            transform.localScale = userScale + new Vector2(weapons[0].instance.selfDamage * (1 - dif), weapons[0].instance.selfDamage * dif);
+
             WeaponUseInfo o = new WeaponUseInfo();
             o.user = this;
-            o.direction = (pos - (Vector2)transform.position).normalized;
+            o.direction = cursorDir.normalized;
             //Shots intentionally are on collider bounds+
             Bounds colliderBounds = col.bounds;
-            colliderBounds.size += new Vector3(1f, 1f);
+            //TODO This does do not account for sudden scale change, fix this later!!!!!!!!
+            colliderBounds.size += new Vector3(2f, 2f);
             //This can be optimized. Don't
-            float dist = 2f;
+            float dist;
             colliderBounds.IntersectRay(new Ray(transform.position, o.direction), out dist);
             o.origin = (Vector2)transform.position - (o.direction * dist);
             if(currentHeld < weapons.Count)weapons[currentHeld]?.Use(o);
-            //Affect scale with shot
-            Vector2 userScale = transform.localScale;
-            transform.localScale = userScale + new Vector2(weapons[0].instance.selfDamage, weapons[0].instance.selfDamage);
+            
+            
             //Call event
             PlayerFired?.Invoke();
         }
