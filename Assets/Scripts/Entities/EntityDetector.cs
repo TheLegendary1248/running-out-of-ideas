@@ -4,17 +4,7 @@ using UnityEngine;
 /// <summary>
 /// 
 /// </summary>
-public class EntityDetector : MonoBehaviour
+public interface EntityDetector
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }

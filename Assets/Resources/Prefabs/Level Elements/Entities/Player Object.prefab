@@ -53,18 +53,39 @@ MonoBehaviour:
   shrinkRate: {x: 0.3, y: 0.3}
   rb: {fileID: 0}
   col: {fileID: 3590249784154979349}
-  killSpeed: 70
+  killSpeed: 50
   slideSFX_Src: {fileID: 4880056650284445114}
-  maxSpeed: 70
+  maxSpeed: 50
   slideCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
   impactSFX_Src: {fileID: 5955215948526642687}
+  sizeWarnSFX_Src: {fileID: 8064887958641855911}
   slideSFXVolMulti: 0
   self: {fileID: 6200000, guid: f40eb59d5ef387042828e6f419efdbce, type: 2}
+  origin: {x: 0, y: 0}
+  scale: {x: 0, y: 0}
 --- !u!212 &3590249784154979348
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -363,13 +384,13 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3590249784154979351}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -1529225477946735313, guid: 379420b5513be7c4f89bfad175b8a00e, type: 2}
   m_audioClip: {fileID: 8300000, guid: 61f0ece662a35cb46836af4b3c339b0b, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.173
-  m_Pitch: 1
+  m_Pitch: 1.96
   Loop: 1
   Mute: 0
   Spatialize: 0

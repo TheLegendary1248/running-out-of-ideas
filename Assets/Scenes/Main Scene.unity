@@ -220,11 +220,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba8d54f815ef9934f8a316a97c0c25db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 43562550}
-  lookAheadMulti: 0.7
-  baseCameraSize: 50
-  viewMulti: 0.25
-  viewSizeCap: 120
+  c_camera: {fileID: 43562550}
+  baseCameraSize: 30
+  viewMulti: 0.2
+  viewSizeCap: 45
+  sizeLerp: 0.03
 --- !u!1 &98988660
 GameObject:
   m_ObjectHideFlags: 0
@@ -643,10 +643,10 @@ RectTransform:
   m_Father: {fileID: 1884163584}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1884163580
 GameObject:
@@ -966,7 +966,7 @@ Transform:
   m_GameObject: {fileID: 1918867887}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.99, y: -4.04, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -984,7 +984,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b891a791cfcb9f46a80061b2c11d29d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 0}
+  minSize: 1
+  maxSize: 3
+  lerp: 0.774
+  c_camera: {fileID: 0}
 --- !u!1001 &1941736561
 PrefabInstance:
   m_ObjectHideFlags: 0

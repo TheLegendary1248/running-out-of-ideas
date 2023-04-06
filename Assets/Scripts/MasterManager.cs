@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+/// <summary>
+/// WRITE DESC PLS
+/// </summary>
 public class MasterManager : MonoBehaviour
 {
     /// <summary>
