@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 6193136994261531169}
   - component: {fileID: 6193136994261531168}
   m_Layer: 9
-  m_Name: Square Wall
+  m_Name: Box Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

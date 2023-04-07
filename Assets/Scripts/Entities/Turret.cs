@@ -9,6 +9,7 @@ public class Turret : MonoBehaviour
     public bool requireSight;
     public float range;
     public string Launcher;
+    public SO_Launcher newLauncherRef;
     public LauncherInstance inst;
     public Coroutine c;
     public float time;

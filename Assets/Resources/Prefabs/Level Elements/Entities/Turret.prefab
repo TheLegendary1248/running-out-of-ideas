@@ -100,5 +100,6 @@ MonoBehaviour:
   requireSight: 0
   range: 0
   Launcher: Radii
+  newLauncherRef: {fileID: 11400000, guid: bde24b509180c0140840609e0fd43a6a, type: 2}
   time: 0.5
   reloadTime: 2

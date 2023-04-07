@@ -113,6 +113,7 @@ public class Player : MonoBehaviour, ICharacter, IWielder
         float speed = rb.velocity.magnitude / maxSpeed;
         slideSFX_Src.volume = slideSFXVolMulti * Mathf.Min(slideCurve.Evaluate(speed), maxSpeed);
         slideSFX_Src.pitch = Mathf.Lerp(0.5f, 1f, slideCurve.Evaluate(speed));
+        slideSFXVolMulti = Mathf.Lerp(0, slideSFXVolMulti, 0.75f);
     }
     public void OnCollisionEnter2D(Collision2D collision)
     {
@@ -120,10 +121,15 @@ public class Player : MonoBehaviour, ICharacter, IWielder
         Vector2 impactForce = collision.relativeVelocity * Vector2.Dot(collision.relativeVelocity.normalized, collision.GetContact(0).normal);
         impactSFX_Src.volume = Mathf.Min(impactForce.sqrMagnitude / (maxSpeed * maxSpeed), maxSpeed * maxSpeed);
         impactSFX_Src.Play();
-        foreach(LauncherInstance inst in holding)
+        //Reload weapons if surface is facing upwards
+        if(Vector2.Dot(collision.GetContact(0).normal, Vector2.up) > 0.5f)
         {
-            if (inst != null) inst.ammo = inst.instance.ammo;
-        }
+            foreach(LauncherInstance inst in holding)
+            {
+                if (inst != null) inst.ammo = inst.instance.ammo;
+            }
+        }    
+        
         if(impactForce.sqrMagnitude > killSpeed * killSpeed) //Make sure to test all collisions
         {
             Kill();
@@ -134,10 +140,6 @@ public class Player : MonoBehaviour, ICharacter, IWielder
     public void OnCollisionStay2D(Collision2D collision)
     {
         slideSFXVolMulti = 1;
-    }
-    public void OnCollisionExit2D(Collision2D collision)
-    {
-        slideSFXVolMulti = 0;
     }
     
     #endregion
