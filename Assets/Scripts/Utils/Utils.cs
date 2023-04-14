@@ -6,4 +6,6 @@ using UnityEngine;
 /// </summary>
 public static class Utils
 {
+
+    public static void LineCastChildChecks() { }
 }
