@@ -984,9 +984,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b891a791cfcb9f46a80061b2c11d29d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minSize: 1
-  maxSize: 3
-  lerp: 0.774
+  minSize: 2
+  maxSize: 6
+  lerp: 0.252
   c_camera: {fileID: 0}
 --- !u!1001 &1941736561
 PrefabInstance:

@@ -36,6 +36,11 @@ public class LauncherInstance
         instance = (SO_Launcher)Resources.Load(Settings.commonPathNames["Launchers"] + $"/{name}");
         ammo = instance.ammo;
     }
+    public LauncherInstance(SO_Launcher thingy)
+    {
+        instance = thingy;
+        ammo = instance.ammo;
+    }
     public void Use(dynamic param)
     {
         if(ammo > 0)
