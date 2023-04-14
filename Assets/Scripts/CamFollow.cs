@@ -14,6 +14,7 @@ public class CamFollow : MonoBehaviour
     public static float shake = 0f;
     //UNUSED - SET WITH SETTINGS
     public static float ShakeMulti = 1;
+    
     private void Update()
     {
         if (Player.singleton != null)
@@ -37,4 +38,9 @@ public class CamFollow : MonoBehaviour
     /// </summary>
     /// <param name="seconds"></param>
     public static void CameraShake(float seconds) => shake = Mathf.Max(seconds, shake);
+    public static void FrameChop(float seconds, float framerate) { }
+    public static void FrameChop(float seconds) { }
+
+
+
 }
