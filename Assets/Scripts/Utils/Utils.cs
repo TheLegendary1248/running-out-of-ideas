@@ -14,5 +14,12 @@ public static class Utils
         public static Color DetectColor = new Color(1f, 0f, 0f, 0.75f);
     }
     public static void LineCastChildChecks() { }
-    
+    /// <summary>
+    /// Rotate a vector 90 degrees to the left
+    /// </summary>
+    public static Vector2 Vec2LeftParallel(Vector2 v) => new Vector2(-v.y, v.x);
+    /// <summary>
+    /// Rotate a vector 90 degrees to the right
+    /// </summary>
+    public static Vector2 Vec2RightParallel(Vector2 v) => new Vector2(v.y, -v.x);
 }
