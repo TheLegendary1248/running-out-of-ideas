@@ -40,15 +40,9 @@ public class Turret : MonoBehaviour
     {
         if(Player.singleton)
         {
-            Vector2 dir = Player.singleton.transform.position - transform.position;
+            Vector2 dir = transform.up;
             inst.Use(new WeaponUseInfo(this, dir.normalized));
         }
         
     }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    
 }
