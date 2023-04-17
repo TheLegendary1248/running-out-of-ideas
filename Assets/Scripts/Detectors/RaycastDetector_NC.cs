@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEditor;
+using UltEvents;
 /// <summary>
 /// In game detector piece that functions like a camera
 /// </summary>
 public class RaycastDetector_NC : MonoBehaviour, IDetector
 {
-    public UnityEvent events;
+    public UltEvent events;
     bool isActive;
     //Arc range of detector
     public float arcRange { 
@@ -24,7 +25,7 @@ public class RaycastDetector_NC : MonoBehaviour, IDetector
     public float radiusRange;
     //If obstructions should be considered
     public bool doSightCheck;
-    
+    public LayerMask detectionMask;
 #if UNITY_EDITOR
     Collider2D[] detectedCols;
 #endif
@@ -36,7 +37,7 @@ public class RaycastDetector_NC : MonoBehaviour, IDetector
     {
         //Get objects in AOE 
         //TODO: FILTER OUT TERRAIN
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, radiusRange);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, radiusRange, detectionMask);
         if (colliders.Length == 0) { return; } //Stop early if there's nothing
         //Filter out objects not in arc range
         Collider2D[] detectedColliders = new Collider2D[colliders.Length];
@@ -67,6 +68,7 @@ public class RaycastDetector_NC : MonoBehaviour, IDetector
         if(detectedArraySize != 0) 
         {
             GameObject obj = detectedColliders[0].gameObject;
+            
             Reciever[] targets = GetComponents<Reciever>();
             for (int i = 0; i < targets.Length; i++)
             {
@@ -89,5 +91,9 @@ public class RaycastDetector_NC : MonoBehaviour, IDetector
         Handles.DrawSolidArc(transform.position, transform.forward, transform.up, -arcRange / 2f, radiusRange);
         Handles.color = Utils.StandardColors.AOEColor;
         Handles.DrawWireDisc(transform.position, transform.forward, radiusRange);
+    }
+    public static bool Test(GameObject m)
+    {
+        return true;
     }
 }
