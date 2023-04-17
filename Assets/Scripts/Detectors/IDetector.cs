@@ -2,17 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IDetector : MonoBehaviour
+public interface IDetector
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    
+}
+public interface Restriction
+{
+    void Delegate();
+}
+[System.Serializable]
+public struct MotionRestriction: Restriction
+{
+    [SerializeField]
+    public float value;
+    void Restriction.Delegate() { }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+}
+public class SizeRestriction
+{
+
 }

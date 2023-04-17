@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEditor;
 /// <summary>
 /// In game detector piece that functions like a camera
 /// </summary>
-public class RaycastDetector_NC : MonoBehaviour
+public class RaycastDetector_NC : MonoBehaviour, IDetector
 {
+    public UnityEvent events;
     bool isActive;
     //Arc range of detector
     public float arcRange { 
@@ -63,9 +65,13 @@ public class RaycastDetector_NC : MonoBehaviour
             detectedColliders[detectedArraySize++] = otherCollider;
         }
         if(detectedArraySize != 0) 
-        { 
-            //Send out notifs
-
+        {
+            GameObject obj = detectedColliders[0].gameObject;
+            Reciever[] targets = GetComponents<Reciever>();
+            for (int i = 0; i < targets.Length; i++)
+            {
+                targets[i].GetSignal(obj);
+            }
         }
     }
     private void OnDrawGizmos()
@@ -84,5 +90,4 @@ public class RaycastDetector_NC : MonoBehaviour
         Handles.color = Utils.StandardColors.AOEColor;
         Handles.DrawWireDisc(transform.position, transform.forward, radiusRange);
     }
-    
 }
