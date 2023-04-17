@@ -24,9 +24,6 @@
 # Visual Studio cache directory
 .vs/
 
-#Plugins
-[Aa]ssets/Plugins
-
 # Gradle cache directory
 .gradle/
 
