@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Scripts that should be applied to all scripts that can recieve a signal
 /// </summary>
-public interface Reciever
+public interface IReciever
 {
     /// <summary>
     /// Signal stuff. Im sorry i really am not up to writing comments at this time 4/17/23 12:10 AM. You can yell at that version of me later

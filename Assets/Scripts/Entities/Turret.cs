@@ -4,7 +4,7 @@ using UnityEngine;
 /// <summary>
 /// Basic Turret Enemy. Just Fires at the Player
 /// </summary>
-public class Turret : MonoBehaviour, Reciever
+public class Turret : MonoBehaviour, IReciever
 {
     public float range;
     public SO_Launcher newLauncherRef;

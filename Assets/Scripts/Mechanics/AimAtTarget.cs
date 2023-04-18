@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AimAtTarget : MonoBehaviour, Reciever
+public class AimAtTarget : MonoBehaviour, IReciever
 {
     Vector2 target;
     /// <summary>
@@ -18,11 +18,11 @@ public class AimAtTarget : MonoBehaviour, Reciever
     /// Is the turrent currently rotating?
     /// </summary>
     bool rotating = false;
-    void Reciever.GetSignal(GameObject target)
+    void IReciever.GetSignal(GameObject target)
     {
         this.target = target.transform.position;
     }
-    void Reciever.GetSignal(Vector2 target)
+    void IReciever.GetSignal(Vector2 target)
     {
         this.target = target;
     }

@@ -69,7 +69,7 @@ public class RaycastDetector_NC : MonoBehaviour, IDetector
         {
             GameObject obj = detectedColliders[0].gameObject;
             
-            Reciever[] targets = GetComponents<Reciever>();
+            IReciever[] targets = GetComponents<IReciever>();
             for (int i = 0; i < targets.Length; i++)
             {
                 targets[i].GetSignal(obj);
